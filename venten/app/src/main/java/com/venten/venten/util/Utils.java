@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Utils {
 
-    @BindingAdapter("android:getElements")
+    /*@BindingAdapter("android:getElements")
     public static String getElements(List<String> stringList){
 
         String elements = "";
@@ -24,5 +24,5 @@ public class Utils {
             return elements;
         }
         return elements;
-    }
+    }*/
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/filter_navigation"
+    app:startDestination="@id/filterListFragment">
+    <fragment
+        android:id="@+id/filterListFragment"
+        android:name="com.venten.venten.view.fragment.FilterListFragment"
+        android:label="FilterListFragment" >
+        <action
+            android:id="@+id/actionCarList"
+            app:destination="@id/carListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/carListFragment"
+        android:name="com.venten.venten.view.fragment.CarListFragment"
+        android:label="CarListFragment" />
+</navigation>

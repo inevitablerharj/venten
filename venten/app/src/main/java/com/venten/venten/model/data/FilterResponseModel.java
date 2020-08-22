@@ -102,7 +102,7 @@ public class FilterResponseModel {
         String elements = "";
 
         if(stringList.size() > 0){
-            for(int i = 0; i<=stringList.size();i++){
+            for(int i = 0; i<stringList.size();i++){
                 if(i == stringList.size()){
 
                     elements = elements + stringList.get(i);
