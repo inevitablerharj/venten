@@ -96,4 +96,23 @@ public class FilterResponseModel {
     public void setColors(List<String> colors) {
         this.colors = colors;
     }
+
+    public String getElements(List<String> stringList){
+
+        String elements = "";
+
+        if(stringList.size() > 0){
+            for(int i = 0; i<=stringList.size();i++){
+                if(i == stringList.size()){
+
+                    elements = elements + stringList.get(i);
+                }else{
+
+                    elements = elements + stringList.get(i) + ", ";
+                }
+            }
+            return elements;
+        }
+        return elements;
+    }
 }
