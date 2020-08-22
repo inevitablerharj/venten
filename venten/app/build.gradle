@@ -35,6 +35,7 @@ def butterknifeVersion = '10.1.0'
 def supportVersion = '28.0.0'
 def retrofitVersion = '2.3.0'
 def rxJavaVersion = '2.1.1'
+def roomVersion = '2.1.0-rc01'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -62,5 +63,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
 
     implementation "com.android.support:multidex:1.0.3"
+
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    annotationProcessor "androidx.room:room-compiler:$roomVersion"
 
 }
