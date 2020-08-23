@@ -10,10 +10,22 @@
         android:label="FilterListFragment" >
         <action
             android:id="@+id/actionCarList"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
             app:destination="@id/carListFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/carListFragment"
         android:name="com.venten.venten.view.fragment.CarListFragment"
-        android:label="CarListFragment" />
+        android:label="CarListFragment" >
+        <action
+            android:id="@+id/action_carListFragment_to_filterListFragment"
+            app:destination="@id/filterListFragment" />
+
+        <argument
+            android:name="filterId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>

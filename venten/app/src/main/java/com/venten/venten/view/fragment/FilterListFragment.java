@@ -73,21 +73,20 @@ public class FilterListFragment extends Fragment {
     }
 
     private void observeViewModel(){
-        filterViewModel.filters.observe(this, filterResponseModels -> {
+        filterViewModel.filters.observe(getViewLifecycleOwner(), filterResponseModels -> {
             if(filterResponseModels != null && filterResponseModels instanceof List){
                 filter_recycler.setVisibility(View.VISIBLE);
                 filterListAdapter.updateFilterList(filterResponseModels);
-
             }
         });
 
-        filterViewModel.filterLoadError.observe(this, isError -> {
+        filterViewModel.filterLoadError.observe(getViewLifecycleOwner(), isError -> {
             if(isError != null && isError instanceof Boolean){
                 listerror.setVisibility(isError ? View.VISIBLE : View.GONE);
             }
         });
 
-        filterViewModel.loading.observe(this, aBoolean -> {
+        filterViewModel.loading.observe(getViewLifecycleOwner(), aBoolean -> {
             if(aBoolean != null && aBoolean instanceof Boolean){
                 loadingView.setVisibility(aBoolean ? View.VISIBLE : View.GONE);
                 if(aBoolean){

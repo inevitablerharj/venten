@@ -7,11 +7,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.venten.venten.R;
 import com.venten.venten.databinding.FilterLayoutItemsBinding;
 import com.venten.venten.model.data.FilterResponseModel;
+import com.venten.venten.view.fragment.FilterListFragmentDirections;
 import com.venten.venten.view.interfaces.FilterClickListener;
 
 import java.util.ArrayList;
@@ -54,6 +56,9 @@ public class FilterListAdapter extends RecyclerView.Adapter<FilterListAdapter.Fi
     public void onFilterClicked(View v) {
         String idString = ((TextView)v.findViewById(R.id.filterId)).getText().toString();
         int id = Integer.valueOf(idString);
+        FilterListFragmentDirections.ActionCarList actionCarList = FilterListFragmentDirections.actionCarList();
+        actionCarList.setFilterId(id);
+        Navigation.findNavController(v).navigate(actionCarList);
 
     }
 
