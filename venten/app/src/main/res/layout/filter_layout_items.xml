@@ -11,7 +11,9 @@
             type="com.venten.venten.view.interfaces.FilterClickListener"/>
     </data>
     <RelativeLayout
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/items_background"
+        android:padding="10dp"
         android:onClick="@{listener::onFilterClicked}"
         android:layout_width="match_parent" android:layout_height="wrap_content">
 
@@ -27,7 +29,7 @@
             android:layout_height="wrap_content"
             android:text="@{String.valueOf(filter.startYear) + `-` + String.valueOf(filter.endYear)}"
             android:id="@+id/year"
-            android:textSize="16sp"
+            android:textSize="@dimen/sp16"
             android:textStyle="bold"
             android:textColor="@android:color/black"/>
 
@@ -39,21 +41,21 @@
             android:layout_below="@id/year"
             android:id="@+id/country"
             android:text="@{filter.getElements(filter.countries)}"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             android:textStyle="normal"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@color/dark_grey"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/year"
-            android:text="@{filter.gender}"
+            android:layout_alignParentBottom="true"
+            android:text="@{filter.gender.toUpperCase()}"
             android:layout_marginTop="5dp"
             android:id="@+id/gender"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             android:textStyle="normal"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@color/dark_grey"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,9 +65,9 @@
             android:layout_below="@id/country"
             android:id="@+id/color"
             android:text="@{filter.getElements(filter.colors)}"
-            android:textSize="13sp"
+            android:textSize="@dimen/sp13"
             android:textStyle="normal"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@color/dark_grey"/>
 
     </RelativeLayout>
 </layout>

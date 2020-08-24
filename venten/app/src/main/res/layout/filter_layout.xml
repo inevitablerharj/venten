@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/filter_recycler"
             android:layout_width="0dp"
@@ -22,14 +21,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/listerror"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/listerror"
-            android:text="An error occurred while loading data"
+            android:text="@string/an_error_occurred_while_loading_data"
+            android:textSize="13sp"
+            app:fontFamily="@font/roboto"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
             android:layout_width="wrap_content"

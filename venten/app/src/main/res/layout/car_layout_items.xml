@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -10,48 +11,77 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_margin="16dp"
+        android:background="@drawable/items_background"
         android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="3dp"
             android:text="@{car.first_name + ` ` + car.last_name}"
             android:id="@+id/name"
             android:textColor="@android:color/black"
-            android:textSize="16dp"
+            android:textSize="@dimen/sp16"
+            app:fontFamily="@font/roboto"
             android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{car.email}"
+            android:text="@{car.job_title}"
             android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="3dp"
+            android:id="@+id/job_title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sp16"
+            app:fontFamily="@font/roboto"
+            android:textStyle="bold"/>
+
+        <View android:layout_height="1dp"
+            android:layout_width="match_parent"
             android:layout_below="@id/name"
+            android:id="@+id/divider"
+            android:background="@color/dark_grey"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{car.email}"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/divider"
             android:id="@+id/email"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="13dp"
+            android:textColor="@color/dark_grey"
+            android:textSize="13sp"
+            app:fontFamily="@font/roboto"
             android:textStyle="normal"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{car.country}"
+            android:layout_marginLeft="3dp"
             android:layout_marginTop="5dp"
             android:layout_below="@id/email"
             android:id="@+id/country"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="13dp"
+            android:textColor="@color/dark_grey"
+            android:textSize="13sp"
+            app:fontFamily="@font/roboto"
             android:textStyle="normal"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{car.car_model}"
+            android:layout_marginLeft="3dp"
             android:layout_marginTop="5dp"
             android:layout_below="@id/country"
             android:id="@+id/car_model"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="13dp"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/sp13"
+            app:fontFamily="@font/roboto"
             android:textStyle="normal"/>
 
         <TextView
@@ -59,10 +89,12 @@
             android:layout_height="wrap_content"
             android:text="@{car.car_model_year}"
             android:layout_marginTop="5dp"
+            android:layout_marginLeft="3dp"
             android:layout_below="@id/car_model"
             android:id="@+id/car_year"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="13dp"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/sp13"
+            app:fontFamily="@font/roboto"
             android:textStyle="normal"/>
 
         <TextView
@@ -70,44 +102,43 @@
             android:layout_height="wrap_content"
             android:text="@{car.car_color}"
             android:layout_marginTop="5dp"
+            android:layout_marginLeft="3dp"
             android:layout_below="@id/car_year"
             android:id="@+id/car_color"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="13dp"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/sp13"
+            app:fontFamily="@font/roboto"
             android:textStyle="normal"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{car.gender}"
+            android:layout_marginLeft="3dp"
             android:layout_marginTop="5dp"
             android:layout_below="@id/car_color"
             android:id="@+id/gender"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="13dp"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/sp13"
+            app:fontFamily="@font/roboto"
             android:textStyle="normal"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{car.job_title}"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/gender"
-            android:id="@+id/job_title"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="13dp"
-            android:textStyle="normal"/>
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{car.bio}"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:layout_below="@id/job_title"
+            android:layout_below="@id/gender"
+            android:layout_alignParentBottom="true"
             android:id="@+id/bio"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="13dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/sp13"
+            app:fontFamily="@font/roboto"
             android:textStyle="normal"/>
 
     </RelativeLayout>

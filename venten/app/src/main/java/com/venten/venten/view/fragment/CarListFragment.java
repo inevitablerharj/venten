@@ -46,7 +46,7 @@ public class CarListFragment extends Fragment {
         if (getArguments() != null) {
             filterId = CarListFragmentArgs.fromBundle(getArguments()).getFilterId();
             carViewModel = ViewModelProviders.of(this).get(CarViewModel.class);
-            carViewModel.fetch(filterId);
+            carViewModel.fetchFilterObject(filterId);
         }
 
         filter_recycler.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -29,11 +29,13 @@ public class CarViewModel extends AndroidViewModel {
 
     public MutableLiveData<List<CarDataModel>> mutableLiveData = new MutableLiveData<List<CarDataModel>>();
     public MutableLiveData<FilterResponseModel>  filterResponseMutableLiveData = new MutableLiveData<FilterResponseModel>();
+
     public MutableLiveData<Boolean> loading = new MutableLiveData<Boolean>();
     public MutableLiveData<Boolean> filterLoadError = new MutableLiveData<Boolean>();
 
     private List<CarDataModel> carDataModelList = new ArrayList<>();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     private AsyncTask<List<CarDataModel>, Void, List<CarDataModel>> searchDataTask;
     private RetrieveFilterTask retrieveFilterTask;
 
@@ -41,6 +43,7 @@ public class CarViewModel extends AndroidViewModel {
         super(application);
     }
 
+    //This is the function that pull out the data from the doc using values in the filter object
     private List<CarDataModel> readCarData(FilterModel filterModel){
        // loading.setValue(true);
         CarDataModel carDataModel = null;
@@ -57,17 +60,21 @@ public class CarViewModel extends AndroidViewModel {
                 String[] tokens = line.split(",");
 
                 //read the data and checks for filter condition.
-                if(tokens[7].contains(filterModel.getColors()) || tokens[4].contains(filterModel.getCountries())
-                        || tokens[8].equalsIgnoreCase(filterModel.getGender())){
-                     if(Utils.isNumber(String.valueOf(filterModel.getStartYear())) && Utils.isNumber(String.valueOf(filterModel.getEndYear()))){
-                         if(Integer.parseInt(tokens[6]) >= filterModel.getStartYear() &&
-                                 Integer.parseInt(tokens[6]) <= filterModel.getEndYear()){
-                             carDataModel = new CarDataModel(tokens[0],tokens[1],tokens[2],tokens[3]
-                                     ,tokens[4],tokens[5],tokens[6],tokens[7],tokens[8],tokens[9],tokens[10]);
-                             carDataModelList.add(carDataModel);
-                         }
-                     }
-
+                try{
+                    if(tokens[7].contains(filterModel.getColors()) || tokens[4].contains(filterModel.getCountries())
+                            || tokens[8].equalsIgnoreCase(filterModel.getGender())){
+                        if(Utils.isNumber(String.valueOf(filterModel.getStartYear())) && Utils.isNumber(String.valueOf(filterModel.getEndYear()))){
+                            if(Integer.parseInt(tokens[6]) >= filterModel.getStartYear() &&
+                                    Integer.parseInt(tokens[6]) <= filterModel.getEndYear()){
+                                carDataModel = new CarDataModel(tokens[0],tokens[1],tokens[2],tokens[3]
+                                        ,tokens[4],tokens[5],tokens[6],tokens[7],tokens[8],tokens[9],tokens[10]);
+                                carDataModelList.add(carDataModel);
+                            }
+                        }
+                    }
+                }catch (NumberFormatException ex){
+                    ex.printStackTrace();
+                    Log.wtf("CarViewModel","Error reading data file on line " +  line, ex);
                 }
                 Log.d("CarViewModel", "My Car data " + carDataModel );
             }
@@ -79,8 +86,6 @@ public class CarViewModel extends AndroidViewModel {
         return carDataModelList;
     }
 
-
-
     @Override
     protected void onCleared() {
         super.onCleared();
@@ -89,8 +94,14 @@ public class CarViewModel extends AndroidViewModel {
             searchDataTask.cancel(true);
             searchDataTask = null;
         }
+
+        if(retrieveFilterTask != null){
+            retrieveFilterTask.cancel(true);
+            retrieveFilterTask = null;
+        }
     }
 
+    //Populate the filtered data into the mutable object
     private void carDataRetrieved(List<CarDataModel> carDataModelList){
         mutableLiveData.setValue(carDataModelList);
         filterLoadError.setValue(false);
@@ -98,6 +109,7 @@ public class CarViewModel extends AndroidViewModel {
     }
 
 
+    //Async task t search for data in the document using values from the filter object
     private class SearchDataTask extends AsyncTask<List<CarDataModel>, Void, List<CarDataModel> > {
 
         private FilterModel filterModel;
@@ -124,7 +136,7 @@ public class CarViewModel extends AndroidViewModel {
         searchDataTask = new SearchDataTask(filterModel);
         searchDataTask.execute();
     }
-
+    //Async task to retrieve the selected filter details from the local database
     private class RetrieveFilterTask extends AsyncTask<Integer, Void, FilterResponseModel>{
 
         @Override
@@ -146,7 +158,7 @@ public class CarViewModel extends AndroidViewModel {
         }
     }
 
-    public void fetch(int uuid){
+    public void fetchFilterObject(int uuid){
         retrieveFilterTask = new RetrieveFilterTask();
         retrieveFilterTask.execute(uuid);
     }

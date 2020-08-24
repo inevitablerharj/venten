@@ -17,10 +17,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listerror"
-        android:text="An error occurred while loading car data"
+        android:text="@string/an_error_occurred_while_loading_car_data"
+        android:textSize="13sp"
+        app:fontFamily="@font/roboto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ProgressBar

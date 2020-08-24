@@ -2,7 +2,6 @@ package com.venten.venten.viewmodel;
 
 import android.app.Application;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -43,6 +42,7 @@ public class FilterViewModel extends AndroidViewModel {
         super(application);
     }
 
+    //check cache duration
     private void checkCacheDuration(){
         String cachePreference = sharedPreferencesHelper.getCachedDuration();
         if(!cachePreference.equals("")){
@@ -55,6 +55,7 @@ public class FilterViewModel extends AndroidViewModel {
         }
     }
 
+    //Force refresh by passing the cache
     public void refresh() {
         checkCacheDuration();
         long updateTime = sharedPreferencesHelper.getUpdateTime();
@@ -70,6 +71,7 @@ public class FilterViewModel extends AndroidViewModel {
         fetchFilterFromRemote();
     }
 
+    // fetch data from the local db when time has not elapsed
     private void fetchFilterFromDatabase(){
         loading.setValue(true);
         retrieveFilterTask = new RetrieveFilterTask();
@@ -98,6 +100,7 @@ public class FilterViewModel extends AndroidViewModel {
         }
     }
 
+    //Async task to insert value from endpoint into local database
     private class InsertFilterTask extends AsyncTask<List<FilterResponseModel>, Void, List<FilterResponseModel> >{
 
         @Override
@@ -126,6 +129,7 @@ public class FilterViewModel extends AndroidViewModel {
         }
     }
 
+    //Async task to retrieve filter objects and populate the recyclerview
     private class RetrieveFilterTask extends AsyncTask<Void, Void,List<FilterResponseModel>>{
 
         @Override
@@ -137,10 +141,10 @@ public class FilterViewModel extends AndroidViewModel {
         protected void onPostExecute(List<FilterResponseModel> filterResponseModelList) {
             super.onPostExecute(filterResponseModelList);
             filterRetrieved(filterResponseModelList);
-            Toast.makeText(getApplication(),"Fetching data from database", Toast.LENGTH_LONG).show();
         }
     }
 
+    // function to pull filters from endpoint
     private void fetchFilterFromRemote() {
         loading.setValue(true);
         compositeDisposable.add(
@@ -152,8 +156,6 @@ public class FilterViewModel extends AndroidViewModel {
                             public void onSuccess(List<FilterResponseModel> dogBreeds) {
                                 insertFilterTask = new InsertFilterTask();
                                 insertFilterTask.execute(dogBreeds);
-                                Toast.makeText(getApplication(),"Fetching data from endpoint", Toast.LENGTH_LONG).show();
-                                //NotificationsHelper.getInstance(getApplication()).createNotification();
                             }
 
                             @Override
